@@ -29,12 +29,12 @@ public:
   /// Construct with a directory containing files to be served.
   explicit request_handler(const std::string& doc_root);
 
-
-  /// determine file extension
-  std::string determine_file_ext(std::string request_path);
-
   /// Handle a request and produce a reply.
   void handle_request(const request& req, reply& rep);
+
+  /// serve a file 
+  void serve_file(const request& req, reply& rep);
+
 
 private:
   /// The directory containing the files to be served.
