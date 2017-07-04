@@ -97,7 +97,8 @@ void request_handler::handle_request(const request& req, reply& rep)
 
   //request_handler::serve_file(req, rep);
   //TODO what is the best way to dispatch uri's here?
-  if(req.uri == "/v0/foo"){
+  if(req.uri == "/v0/foo")
+  {
     std::cout << "PRINT OMG" << std::endl;
 
     // Fill out the reply to be sent to the client.
@@ -116,6 +117,25 @@ void request_handler::handle_request(const request& req, reply& rep)
     rep.headers[0].name = "Content-Length";
     rep.headers[0].value = std::to_string(rep.content.size());
   }
+  else if(req.uri == "/v0/bar")
+  {
+    std::cout << "PRINT OMG" << std::endl;
+
+    // Fill out the reply to be sent to the client.
+    rep.status = reply::ok;
+
+    Json::Value body(Json::objectValue);
+   
+    //better way to do this?
+    Json::FastWriter fastWriter;
+    rep.content = fastWriter.write(body);
+
+    rep.headers.resize(2);
+    rep.headers[0].name = "Content-Length";
+    rep.headers[0].value = std::to_string(rep.content.size());
+  }
+  else 
+  {}
 	
 
 
