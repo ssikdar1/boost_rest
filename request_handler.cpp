@@ -122,7 +122,7 @@ void request_handler::handle_request(const request& req, reply& rep)
     std::cout << "PRINT OMG" << std::endl;
 
     // Fill out the reply to be sent to the client.
-    rep.status = reply::ok;
+    rep.status = reply::bad_request;
 
     Json::Value body(Json::objectValue);
    
@@ -138,6 +138,8 @@ void request_handler::handle_request(const request& req, reply& rep)
   {}
 	
 
+  std::cout << "response code: " << rep.status  << std::endl;
+  std::cout << "response body: " << rep.content  << std::endl;
 
 }
 
