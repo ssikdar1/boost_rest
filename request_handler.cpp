@@ -94,23 +94,29 @@ void request_handler::handle_request(const request& req, reply& rep)
 
   std::cout << "request_path: " << request_path << std::endl;
 
+
   //request_handler::serve_file(req, rep);
+  //TODO what is the best way to dispatch uri's here?
+  if(req.uri == "/v0/foo"){
+    std::cout << "PRINT OMG" << std::endl;
 
-  // Fill out the reply to be sent to the client.
-  rep.status = reply::ok;
+    // Fill out the reply to be sent to the client.
+    rep.status = reply::ok;
 
-  Json::Value body(Json::objectValue);
-  body["platform"] = "linux";
-  body["deviceId"] = "623bce38-a1f4-11e6-bb6c-3417eb9985a6";
-  body["version"] = "17.2.3";
- 
-  //better way to do this?
-  Json::FastWriter fastWriter;
-  rep.content = fastWriter.write(body);
+    Json::Value body(Json::objectValue);
+    body["platform"] = "linux";
+    body["deviceId"] = "623bce38-a1f4-11e6-bb6c-3417eb9985a6";
+    body["version"] = "17.2.3";
+   
+    //better way to do this?
+    Json::FastWriter fastWriter;
+    rep.content = fastWriter.write(body);
 
-  rep.headers.resize(2);
-  rep.headers[0].name = "Content-Length";
-  rep.headers[0].value = std::to_string(rep.content.size());
+    rep.headers.resize(2);
+    rep.headers[0].name = "Content-Length";
+    rep.headers[0].value = std::to_string(rep.content.size());
+  }
+	
 
 
 }
